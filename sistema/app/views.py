@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Produto
+from django.db.models import Q
 
 def pesquisar(request):
-    resultado = Produto.objects.get(id=1)
-    return HttpResponse(resultado)
+    if request.method == 'POST':
+        pesquisa = request.POST.get('pesquisa')
+        resultado = Produto.objects.filter(nome__contains=pesquisa)
+        return render(request, 'loja/pesquisa.html', {
+            "pesquisa": pesquisa,
+            "resultado": resultado
+        })
+    else:
+        resultado = Produto.objects.all()
+        return render(request, 'loja/pesquisa.html', {
+            "resultado": resultado
+        })
+
 
 def cadastrar(request):
     print("Chegou no Cadastrar")

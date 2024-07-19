@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: solid 2px purple;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        form {
+            margin-bottom: 10px;
+            border: gray 1px solid;
+            padding: 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/loja/pesquisar" method="post">
+        {% csrf_token %}
+        <label for="pesquisa">Pesquisa</label>
+        <input type="search" name="pesquisa" id="pesquisa" value="{{pesquisa}}" autofocus>
+        <input type="submit" value="Pesquisar">
+    </form>
+
+    {% if resultado|length != 0 %}
+        <table border>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+            </tr>
+            {% for fruta in resultado %}
+            <tr>
+                <td>{{fruta.nome}}</td>
+                <td>R$ {{fruta.valor}}</td>
+
+                {% if fruta.estoque == 0 %}
+                    <td style="background-color: wheat;">{{fruta.estoque}}</td>
+                {% else %}
+                    <td style="background-color: aquamarine;">{{fruta.estoque}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1>Nenhum resultado</h1>
+    {% endif %}
+</body>
+
+</html>
