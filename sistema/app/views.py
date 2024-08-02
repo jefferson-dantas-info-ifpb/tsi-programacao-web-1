@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import Produto
 from django.db.models import Q
 
+def home(request):
+    return render(request, 'loja/home.html', {})
+
 def pesquisar(request):
     if request.method == 'POST':
         pesquisa = request.POST.get('pesquisa')
