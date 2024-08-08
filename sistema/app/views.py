@@ -4,7 +4,12 @@ from .models import Produto
 from django.db.models import Q
 
 def home(request):
-    return render(request, 'loja/home.html', {})
+    resposta = Produto.objects.all()
+    return render(request, 'loja/home.html', {'resposta': resposta})
+
+def preco(request):
+    resposta = Produto.objects.all()
+    return render(request, 'loja/preco.html', {'resposta': resposta})
 
 def pesquisar(request):
     if request.method == 'POST':
