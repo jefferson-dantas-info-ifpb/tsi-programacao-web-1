@@ -3,11 +3,11 @@ from django.db import models
 # Create your models here.
 class Produto(models.Model):
     nome = models.CharField(max_length=200)
-    fabricante = models.CharField(max_length=200)
+    fabricante = models.CharField(max_length=200, null=True, blank=True)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
-    data_validade = models.DateField()
+    data_validade = models.DateField(null=True, blank=True)
     estoque = models.IntegerField()
-    descricao = models.TextField()
+    descricao = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.nome

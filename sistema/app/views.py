@@ -27,8 +27,18 @@ def pesquisar(request):
 
 
 def cadastrar(request):
-    print("Chegou no Cadastrar")
-    return HttpResponse("Estou no cadastrar")
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        preco = request.POST.get('preco')
+        qtd = request.POST.get('quantidade')
+        
+        novo_produto = Produto()
+        novo_produto.nome = nome
+        novo_produto.valor = preco
+        novo_produto.estoque = qtd
+        novo_produto.save()
+
+    return render(request, 'loja/formcad.html', {})
 
 def deletar(request):
     print("Chegou no Deletar")

@@ -1,0 +1,23 @@
+{% extends 'loja/base.html' %}
+
+{% block conteudo %}
+
+<form action="/loja/cadastrar" method="POST">
+    {% csrf_token %}
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required>
+    <br />
+    
+    <label for="nome">Preço</label>
+    <input type="number" name="preco" id="preco" required>
+    <br />
+    
+    <label for="nome">Quantidade</label>
+    <input type="number" name="quantidade" id="quantidade" required>
+    <br />
+
+    <input type="submit" value="Cadastra">
+
+</form>
+
+{% endblock %}
