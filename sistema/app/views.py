@@ -45,8 +45,16 @@ def deletar(request):
     return HttpResponse("Estou no deletar")
 
 def atualizar(request):
-    print("Atualzar")
-    return HttpResponse("Estou no atualizar")
+    if request.method == 'POST':
+        valor = request.POST.get('valor')
+        id_fruta = request.POST.get('id')
+
+        fruta = Produto.objects.get(id=id_fruta)
+        fruta.valor = valor
+        fruta.save()
+
+    frutas = Produto.objects.all()
+    return render(request, "loja/atualizar.html", {'frutas': frutas})
 
 #############################################################
 
