@@ -12,21 +12,19 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
+class Endereco(models.Model):
+    rua =  models.CharField(max_length=100)
+    bairro =  models.CharField(max_length=100)
+    numero =  models.IntegerField()
+    cidade =  models.CharField(max_length=50)
+    cep = models.CharField(max_length=8)
+    
+    def __str__(self):
+        return self.rua
+
 class Fornecedor(models.Model):
     nome = models.CharField(max_length=200)
-    cpf_cnpj = models.CharField(max_length=18)
-    endereco = models.CharField(max_length=200, blank=True, null=True)
-    telefone = models.CharField(max_length=200)
-    obs = models.TextField()
+    endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, default=1)
     
     def __str__(self):
         return self.nome
-
-class Endereco(models.Model):
-    numero = models.IntegerField()
-    rua = models.CharField(max_length=100)
-    bairro = models.CharField(max_length=100)
-    cidade = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.rua
